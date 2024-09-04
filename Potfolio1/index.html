@@ -6,8 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
+
   <body>
-    
+    <script>
+      async function postjson(event, form) {
+        event.preventDefault()
+        await fetch("http://localhost:3999/postjson", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: form
+        })
+        window.location.replace("/")
+      }
+    </script>
+    <header>
+      <h1>Portfolio</h1>
+      <nav>
+        <ul>
+          <li>Hjem</li>
+          <li>Prosjekter</li>
+          <li>Om meg</li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="prosjekt-liste">
+        <h2>Alle prosjekter</h2>
+        <ul id="prodjekter">
+  
+        </ul>
+      </section>
+
+      <section id="nytt-prosjekt">
+        <h2>Nytt prosjekt</h2>
+        
+        <form onsubmit="postjson(event, this)" id="prosjekt-form">
+          <!-- <form method="post" action="/data-storing.json"></form> -->
+          <label for="title">Navn:</label>
+          <input type="text" name="title" id="title" placeholder="Portfolio" required/>
+        
+          <label for="description">Beskrivelse:</label>
+          <input type="text" name="description" id="description" placeholder="Lage portfolio til å..." required/>
+        
+          <label for="start-date">Startdato:</label>
+          <input type="date" name="start-date" id="start-date" required/>
+        
+          <label for="end-date">Sluttdato:</label>
+          <input type="date" name="end-date" id="end-date"/>
+        
+          <label for="status">Status:</label>
+          <select name="status" id="status">
+            <option value="completed">Fullført</option>
+            <option value="ongoing">Pågående</option>
+          </select>
+
+          <input type="submit" id="new-project">
+        </form>
+      </section>
+    </main>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
