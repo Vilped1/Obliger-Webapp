@@ -8,19 +8,6 @@
   </head>
 
   <body>
-    <script>
-      async function postjson(event, form) {
-        event.preventDefault()
-        await fetch("http://localhost:3999/postjson", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: form
-        })
-        window.location.replace("/")
-      }
-    </script>
     <header>
       <h1>Portfolio</h1>
       <nav>
@@ -33,9 +20,9 @@
     </header>
 
     <main>
-      <section id="prosjekt-liste">
+      <section id="section">
         <h2>Alle prosjekter</h2>
-        <ul id="prodjekter">
+        <ul id="prosjektListe">
   
         </ul>
       </section>
@@ -43,24 +30,23 @@
       <section id="nytt-prosjekt">
         <h2>Nytt prosjekt</h2>
         
-        <form onsubmit="postjson(event, this)" id="prosjekt-form">
-          <!-- <form method="post" action="/data-storing.json"></form> -->
+          <form>
           <label for="title">Navn:</label>
           <input type="text" name="title" id="title" placeholder="Portfolio" required/>
         
           <label for="description">Beskrivelse:</label>
           <input type="text" name="description" id="description" placeholder="Lage portfolio til å..." required/>
         
-          <label for="start-date">Startdato:</label>
-          <input type="date" name="start-date" id="start-date" required/>
+          <label for="startDate">Startdato:</label>
+          <input type="date" name="startDate" id="startDate" required/>
         
-          <label for="end-date">Sluttdato:</label>
-          <input type="date" name="end-date" id="end-date"/>
+          <label for="endDate">Sluttdato:</label>
+          <input type="date" name="endDate" id="endDate"/>
         
           <label for="status">Status:</label>
           <select name="status" id="status">
-            <option value="completed">Fullført</option>
-            <option value="ongoing">Pågående</option>
+            <option value="Fullført">Fullført</option>
+            <option value="Pågående">Pågående</option>
           </select>
 
           <input type="submit" id="new-project">
