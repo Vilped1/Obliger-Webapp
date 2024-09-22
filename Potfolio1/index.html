@@ -6,8 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
-  <body>
 
+  <body>
+    <header>
+      <h1>Portfolio</h1>
+      <nav>
+        <ul>
+          <li>Hjem</li>
+          <li>Prosjekter</li>
+          <li>Om meg</li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="section">
+        <h2>Alle prosjekter</h2>
+        <ul id="prosjektListe">
+  
+        </ul>
+      </section>
+
+      <section id="nytt-prosjekt">
+        <h2>Nytt prosjekt</h2>
+        
+          <form>
+          <label for="title">Navn:</label>
+          <input type="text" name="title" id="title" placeholder="Portfolio" required/>
+        
+          <label for="description">Beskrivelse:</label>
+          <input type="text" name="description" id="description" placeholder="Lage portfolio til å..." required/>
+        
+          <label for="startDate">Startdato:</label>
+          <input type="date" name="startDate" id="startDate" required/>
+        
+          <label for="endDate">Sluttdato:</label>
+          <input type="date" name="endDate" id="endDate"/>
+        
+          <label for="status">Status:</label>
+          <select name="status" id="status">
+            <option value="Fullført">Fullført</option>
+            <option value="Pågående">Pågående</option>
+          </select>
+
+          <input type="submit" id="new-project">
+        </form>
+      </section>
+    </main>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
