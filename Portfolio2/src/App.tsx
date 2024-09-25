@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react'
 import './style/main.scss'
 import { ProjectType } from "../backend/src/type"
-import Header from './components/Header'
 import Projects from './components/Projects'
 import Form from './components/Form'
+import { Route, Routes } from 'react-router-dom'
+// import ContactForm from './components/ContactForm'
+import Layout from './components/Layout'
+import Experiences from './components/Experiences'
+import Contact from './components/Contact'
 
 // Copilot er biltt brukt som et hjelpemiddel i denne oppgaven, samt oppgaver gjort i forelesning
 
 function App() {
   const [prod, setProd] = useState<ProjectType[]>([])
+
+  const experienceOne = 'Figma UI for customer X'
+  const experienceTwo = 'Website for customer Y'
+  const email = 'student@hiof.no'
 
 // Fra forelesning!!
 const loadProjectData = async() => {
@@ -18,11 +26,12 @@ const loadProjectData = async() => {
           "Content-Type": "application/json",
       }
   })
-  console.log(response.status)
-  console.log(response.ok)
+  console.log("Get", response.status)
+  console.log("Get",response.ok)
   
   const data = await response.json()
   setProd(data.data)
+  console.log("Get", data)
 }
 
 const addProjectData = async (event: ProjectType) => {
@@ -38,7 +47,7 @@ const addProjectData = async (event: ProjectType) => {
   console.log("OK", response.ok)
   
   const data = await response.json()
-  console.log(data)
+  console.log("Post",data)
   loadProjectData()
   } catch (error) {
       console.log(error)
@@ -51,11 +60,14 @@ useEffect(() => {
 
   return (
     <>
-      <Header/>
-      <main>
-        <Projects projects={prod} />
+    <Layout>
+      <Routes>
+        <Route index element={<Projects projects={prod} setProjects={setProd}/>}/>
+        <Route path='contact' element={<Contact email={email} />}/>
+      </Routes>
+        <Experiences experienceOne={experienceOne} experienceTwo={experienceTwo} />
         <Form onAddProject={addProjectData} />
-      </main>
+    </Layout>
     </>
   )
 }

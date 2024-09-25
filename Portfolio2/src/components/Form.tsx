@@ -4,26 +4,7 @@ type FormType = {
     onAddProject: (project: ProjectType) => void;
 }
 
-export default function Form({onAddProject}: FormType) {
-    // const addProjectData = async (event: ProjectType) => {
-    //     try {
-    //         const response = await fetch("http://localhost:3899", {
-    //         method: 'POST',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(event)
-    //     })
-    //     console.log("Status", response.status)
-    //     console.log("OK", response.ok)
-        
-    //     const data = await response.json()
-    //     console.log(data)
-    //     loadProjectData()
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    //   }
+export default function Form({onAddProject}: FormType) {    
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
