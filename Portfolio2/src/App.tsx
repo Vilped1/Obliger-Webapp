@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Projects from './components/Projects'
 import Form from './components/Form'
 
+// Copilot er biltt brukt som et hjelpemiddel i denne oppgaven, samt oppgaver gjort i forelesning
 
 function App() {
   const [prod, setProd] = useState<ProjectType[]>([])
