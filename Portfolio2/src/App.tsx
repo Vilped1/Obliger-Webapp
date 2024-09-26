@@ -7,67 +7,81 @@ import { Route, Routes } from 'react-router-dom'
 // import ContactForm from './components/ContactForm'
 import Layout from './components/Layout'
 import Experiences from './components/Experiences'
-import Contact from './components/Contact'
+import ContactForm from './components/ContactForm'
 
 // Copilot er biltt brukt som et hjelpemiddel i denne oppgaven, samt oppgaver gjort i forelesning
 
 function App() {
   const [prod, setProd] = useState<ProjectType[]>([])
+  // const randomId = prod.map(e)
+
+  // const onAddProject = (prodject: Omit<ProjectType, "id">) => {
+  //   setProd((prev: any) => [...prev, {id: crypto.randomUUID(), ...prodject}])
+
+  // }
 
   const experienceOne = 'Figma UI for customer X'
   const experienceTwo = 'Website for customer Y'
-  const email = 'student@hiof.no'
+  const email = 'vapeders@hiof.no'
 
-// Fra forelesning!!
-const loadProjectData = async() => {
-  const response = await fetch("http://localhost:3899", {
+  // Fra forelesning!!
+  const loadProjectData = async () => {
+    const response = await fetch("http://localhost:3899", {
       method: "GET",
       headers: {
-          "Content-Type": "application/json",
+        "Content-Type": "application/json",
       }
-  })
-  console.log("Get", response.status)
-  console.log("Get",response.ok)
-  
-  const data = await response.json()
-  setProd(data.data)
-  console.log("Get", data)
-}
+    })
+    console.log("Get", response.status)
+    console.log("Get", response.ok)
 
-const addProjectData = async (event: ProjectType) => {
-  try {
-      const response = await fetch("http://localhost:3899", {
-      method: 'POST',
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event)
-  })
-  console.log("Status", response.status)
-  console.log("OK", response.ok)
-  
-  const data = await response.json()
-  console.log("Post",data)
-  loadProjectData()
-  } catch (error) {
-      console.log(error)
+    const data = await response.json()
+    setProd(data.data)
+    console.log("Get", data)
   }
-}
 
-useEffect(() => {
-  loadProjectData()
-}, [])
+  const addProjectData = async (event: ProjectType) => {
+    try {
+      const response = await fetch("http://localhost:3899", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(event)
+      })
+      console.log("Status", response.status)
+      console.log("OK", response.ok)
+
+      const data = await response.json()
+      console.log("Post", data)
+      const onAddProject = (project: Omit<ProjectType, "id">) => {
+        setProd((prev: any) => [...prev, {id: crypto.randomUUID(), ...project}])
+      }
+      onAddProject(data)
+      // setProd((prev: any) => [...prev, {id: crypto.randomUUID(), ...prod}])
+      loadProjectData()
+      console.log(onAddProject)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  useEffect(() => {
+    loadProjectData()
+  }, [])
 
   return (
     <>
-    <Layout>
-      <Routes>
-        <Route index element={<Projects projects={prod} setProjects={setProd}/>}/>
-        <Route path='contact' element={<Contact email={email} />}/>
-      </Routes>
-        <Experiences experienceOne={experienceOne} experienceTwo={experienceTwo} />
-        <Form onAddProject={addProjectData} />
-    </Layout>
+      <Layout>
+        <Routes>
+          <Route index element={
+            <Projects projects={prod} setProjects={setProd}>
+              <Form addProjectData={addProjectData} />
+              <Experiences experienceOne={experienceOne} experienceTwo={experienceTwo} />
+            </Projects>} />
+          <Route path='contact' element={<ContactForm email={email} />} />
+        </Routes>
+      </Layout>
     </>
   )
 }

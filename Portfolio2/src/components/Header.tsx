@@ -13,8 +13,8 @@ export default function Header(props: HeaderType) {
         <h1>Portfolio</h1>
         <nav>
           <ul>
-            <li>Hjem</li>
-            <li>Prosjekter</li>
+            <li><Link to="/">Hjem</Link></li>
+            <li>Om meg</li>
             <li><Link to="contact">Ta kontakt</Link></li>
           </ul>
         </nav>

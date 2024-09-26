@@ -3,28 +3,19 @@ import { ProjectType } from "../../backend/src/type"
 type ProdType = {
     projects: ProjectType[]
     setProjects: any
+    children: React.ReactNode;
 }
 
-export default function Projects({projects, setProjects}: ProdType) {
 
-    const removeProject = (title: string) => {
-        setProjects((prevProjects: any[]) => prevProjects.filter((prod) => prod.title !== title))
+export default function Projects({projects, setProjects, children}: ProdType) {
+
+    const removeProject = (id: any) => {
+        setProjects((prevProjects: any[]) => prevProjects.filter((prod) => prod.id !== id))
+        console.log("Fjernet", projects)
     }
 
-    // const handleHabitMutation = (action: Action, habit: Habit) => {
-    //     switch (action) {
-    //       case "add":
-    //         add(habit);
-    //         break;
-    //       case "remove":
-    //         remove(habit.id);
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //   };
-
     return(
+        <>
         <section id="section">
         <h2>Alle prosjekter</h2>
         <ul id="prosjektListe">
@@ -33,7 +24,7 @@ export default function Projects({projects, setProjects}: ProdType) {
             ) : (
             projects.map((project, index) => (
                 <li key={index}>
-                <button onClick={() => removeProject(project.title)} type="button">X</button>
+                <button onClick={() => removeProject(project.id)} type="button">X</button>
                 {project.title} - Sluttdato: {project.endDate} - {project.status}
                 </li>
             ))
@@ -41,6 +32,7 @@ export default function Projects({projects, setProjects}: ProdType) {
         </ul>
         <p>Du har {projects.length} prosjekter!</p>
       </section>
-      
+      {children}
+      </>
     )
 }

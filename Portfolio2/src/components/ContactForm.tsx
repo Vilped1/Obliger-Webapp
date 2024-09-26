@@ -1,28 +1,24 @@
-export default function ContactForm() {
-    return(
-        <main>
-        <h1>HIIIIIIII</h1>
-        <form>
-          <label>Navn:</label>
-          <input type="text" name="title" id="title" placeholder="Portfolio" required/>
-          
-          <label>Beskrivelse:</label>
-          <input type="text" name="description" id="description" placeholder="Lage portfolio til å..." required/>
-          
-          <label>Startdato:</label>
-          <input type="date" name="startDate" id="startDate" required/>
-          
-          <label>Sluttdato:</label>
-          <input type="date" name="endDate" id="endDate" required/>
-          
-          <label>Status:</label>
-          <select name="status" id="status">
-              <option value="Fullført">Fullført</option>
-              <option value="Pågående">Pågående</option>
-          </select>
+type ContactType = {
+    email: string
+}
 
-          <button type="submit" id="new-project">Send</button>
-        </form>
-        </main>
+export default function ContactForm(props: ContactType) {
+    const {email} = props
+    
+    return(
+        <>
+        <section id="kontakt">
+            <p>Har du spørsmål ta kontakt på:</p>
+            <h3>{email}</h3>
+            <form>
+                <label>Navn:</label>
+                <input type="text" name="title" id="title" placeholder="Kari Normann" required/>
+                
+                <label>Melding:</label>
+                <textarea name="message" id="message" placeholder="Jeg lurer på..." required/>
+                <button id="contactbtn">Send inn</button>
+            </form>
+            </section>
+        </>
     )
 }

@@ -88,8 +88,10 @@ label{
     padding-top: 1rem;
 }
 
-#new-project{
+#new-project, #contactbtn{
     margin: 1rem;
+    width: 150px;
+    align-self: center;
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
