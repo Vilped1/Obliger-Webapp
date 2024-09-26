@@ -6,11 +6,11 @@ type FormType = {
 }
 
 export default function Form({addProjectData}: FormType) {  
-    
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const form = event.currentTarget
-        const newProject: ProjectType = {
+        let newProject: ProjectType = {
             id: crypto.randomUUID(),
             title: (form.elements.namedItem("title") as HTMLInputElement)?.value,
             description: (form.elements.namedItem("description") as HTMLInputElement)?.value,
@@ -18,15 +18,15 @@ export default function Form({addProjectData}: FormType) {
             endDate: (form.elements.namedItem("endDate") as HTMLInputElement)?.value,
             status: (form.elements.namedItem("status") as HTMLInputElement)?.value,
         }
-
         addProjectData(newProject)
+        form.reset()
       }
 
     return(
         <section id="nytt-prosjekt">
         <h2>Nytt prosjekt</h2>
         
-        <form onSubmit={handleSubmit}>
+        <form  id="form" onSubmit={handleSubmit}>
           <label>Navn:</label>
           <input type="text" id="title" placeholder="Portfolio" required/>
           

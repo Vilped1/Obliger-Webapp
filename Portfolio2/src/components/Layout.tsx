@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Header from "./Header";
 
 type Props = {
@@ -11,10 +12,11 @@ export default function Layout({children}: Props) {
 
     return(
         <>
-            <Header student={student} degree={degree} points={points}/>
+            <Header/>
             <main>
                 {children}
             </main>
+            <Footer student={student} degree={degree} points={points}/>
         </>
     )
 }
