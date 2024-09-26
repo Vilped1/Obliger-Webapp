@@ -1,6 +1,5 @@
 import { ProjectType } from "../../backend/src/type"
 
-
 type FormType = {
     addProjectData: (project: ProjectType) => void;
 }

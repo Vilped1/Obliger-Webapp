@@ -4,21 +4,14 @@ import { ProjectType } from "../backend/src/type"
 import Projects from './components/Projects'
 import Form from './components/Form'
 import { Route, Routes } from 'react-router-dom'
-// import ContactForm from './components/ContactForm'
 import Layout from './components/Layout'
 import Experiences from './components/Experiences'
 import ContactForm from './components/ContactForm'
 
-// Copilot er biltt brukt som et hjelpemiddel i denne oppgaven, samt oppgaver gjort i forelesning
+// Copilot er blitt brukt som et hjelpemiddel i denne oppgaven, samt oppgaver gjort i forelesning
 
 function App() {
   const [prod, setProd] = useState<ProjectType[]>([])
-  // const randomId = prod.map(e)
-
-  // const onAddProject = (prodject: Omit<ProjectType, "id">) => {
-  //   setProd((prev: any) => [...prev, {id: crypto.randomUUID(), ...prodject}])
-
-  // }
 
   const experienceOne = 'Figma UI for customer X'
   const experienceTwo = 'Website for customer Y'
@@ -58,7 +51,6 @@ function App() {
         setProd((prev: any) => [...prev, {id: crypto.randomUUID(), ...project}])
       }
       onAddProject(data)
-      // setProd((prev: any) => [...prev, {id: crypto.randomUUID(), ...prod}])
       loadProjectData()
       console.log(onAddProject)
     } catch (error) {
