@@ -1,7 +1,7 @@
-import { ProjectType } from "../../backend/src/type"
+import { ProjectType } from "../../../backend/src/type"
 
 type FormType = {
-    addProjectData: (project: ProjectType) => void;
+    addProjectData: (project: ProjectType) => void
 }
 
 export default function Form({addProjectData}: FormType) {  
@@ -18,7 +18,7 @@ export default function Form({addProjectData}: FormType) {
             status: (form.elements.namedItem("status") as HTMLInputElement)?.value,
         }
         addProjectData(newProject)
-        form.reset()
+        // form.reset()
       }
 
     return(

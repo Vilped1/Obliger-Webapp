@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './style/main.scss'
-import { ProjectType } from "../backend/src/type"
+import { ProjectType } from "../../backend/src/type"
 import Projects from './components/Projects'
 import Form from './components/Form'
 import { Route, Routes } from 'react-router-dom'
@@ -52,7 +52,25 @@ function App() {
       }
       onAddProject(data)
       loadProjectData()
-      console.log(onAddProject)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const deleteProjectData = async (id: string) => {
+    try {
+      const response = await fetch(`http://localhost:3899/${id}`, { 
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      console.log("Delete", response.status)
+      console.log("Delete OK", response.ok)
+
+      const data = await response.json()
+      setProd(data.updatedProjects)
+      // loadProjectData()
     } catch (error) {
       console.log(error)
     }
@@ -67,7 +85,7 @@ function App() {
       <Layout>
         <Routes>
           <Route index element={
-            <Projects projects={prod} setProjects={setProd}>
+            <Projects projects={prod} setProjects={setProd} deleteProjectData={deleteProjectData} >
               <Form addProjectData={addProjectData} />
               <Experiences experienceOne={experienceOne} experienceTwo={experienceTwo} />
             </Projects>} />

@@ -1,21 +1,23 @@
-import { ProjectType } from "../../backend/src/type"
 import { useEffect, useState } from "react"
+import { ProjectType } from "../../../backend/src/type";
 
 type ProdType = {
     projects: ProjectType[]
     setProjects: React.Dispatch<React.SetStateAction<ProjectType[]>>
     children: React.ReactNode;
+    deleteProjectData: (id: string) => void
 }
 
-export default function Projects({projects, setProjects, children}: ProdType) {
+export default function Projects({projects, children, deleteProjectData}: ProdType) {
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [name, setName] = useState("Alle prosjekter")
 
     // Modifisert kode fra copilot{
-    const removeProject = (id: string) => {
-        setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id))
-        console.log("Fjernet", projects)
-    }
+    // const handleDeleteProject = (id: string) => {
+    //     setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id))
+    //     // deleteProjectData(projects)
+    //     console.log("Fjernet", projects)
+    // }
 
     const filterProjects = (status: string) => {
         if (status === "Alle") {
@@ -32,6 +34,7 @@ export default function Projects({projects, setProjects, children}: ProdType) {
 
     useEffect(() => {
         setFilteredProjects(projects)
+        // deleteProjectData(projects)
     }, [projects])
     // }
 
@@ -53,7 +56,7 @@ export default function Projects({projects, setProjects, children}: ProdType) {
             ) : (
             filteredProjects.map((project, index) => (
                 <li key={index} className="all">
-                <button onClick={() => removeProject(project.id)} type="button">X</button>
+                <button onClick={() => deleteProjectData(project.id)} type="button">X</button>
                 {project.title} - Sluttdato: {project.endDate} - {project.status}
                 </li>
             ))
