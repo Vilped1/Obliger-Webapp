@@ -49,8 +49,8 @@ export default function Projects({projects, children, deleteProjectData}: ProdTy
           </select>
         </section>
         <section id="section">
-        <ul id="prosjektListe">
         <h2>{name}</h2>
+        <ul id="prosjektListe">
             {filteredProjects.length === 0 ? (
                 <p>Ingen prosjekter</p>
             ) : (
@@ -62,6 +62,22 @@ export default function Projects({projects, children, deleteProjectData}: ProdTy
             ))
             )}
         </ul>
+          {/* <section id="prosjektListe">
+            {filteredProjects.length === 0 ? (
+                <p>Ingen prosjekter</p>
+            ) : (
+            filteredProjects.map((project, index) => (
+                <article key={index} className="all">
+                    <section>
+                        <h3>{project.title}</h3>
+                        <button onClick={() => deleteProjectData(project.id)} type="button">X</button>
+                    </section>
+                    - Beskrivelse: {project.description}
+                    - Sluttdato: {project.endDate} - {project.status}
+                </article>
+            ))
+            )}
+        </section> */}
         {filteredProjects.length === 1 ? (
             <p>Du har {filteredProjects.length} prosjekt!</p>
         ) : (
