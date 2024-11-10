@@ -7,4 +7,7 @@ export type ProjectType = {
     startDate: any
     endDate: any
     status: string
+    publishedAt: any
+    tags: any
+    public: boolean
 }

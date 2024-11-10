@@ -8,7 +8,7 @@ type ProdType = {
     deleteProjectData: (id: string) => void
 }
 
-export default function Projects({projects, children, deleteProjectData}: ProdType) {
+export default function Projects({ projects, children, deleteProjectData }: ProdType) {
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [name, setName] = useState("Alle prosjekter")
 
@@ -25,7 +25,13 @@ export default function Projects({projects, children, deleteProjectData}: ProdTy
         } else {
             setFilteredProjects(projects.filter((project) => project.status === status));
         }
-        setName(`${status} prosjekter`)
+
+        if (status === "Fullført") {
+            setName(`${status}e prosjekter`)
+        } else {
+            setName(`${status} prosjekter`)
+        }
+        // setName(status === "Fullført" ? status"e" : )
     }
 
     const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -38,31 +44,31 @@ export default function Projects({projects, children, deleteProjectData}: ProdTy
     }, [projects])
     // }
 
-    return(
+    return (
         <>
-        <section id="sort">
-          <label>Sorter: </label>
-          <select name="status" id="status" onChange={handleFilterChange}>
-              <option value="Alle">Alle prosjekter</option>
-              <option value="Fullført">Fullførte prosjekter</option>
-              <option value="Pågående">Pågående prosjekter</option>
-          </select>
-        </section>
-        <section id="section">
-        <h2>{name}</h2>
-        <ul id="prosjektListe">
-            {filteredProjects.length === 0 ? (
-                <p>Ingen prosjekter</p>
-            ) : (
-            filteredProjects.map((project, index) => (
-                <li key={index} className="all">
-                <button onClick={() => deleteProjectData(project.id)} type="button">X</button>
-                {project.title} - Sluttdato: {project.endDate} - {project.status}
-                </li>
-            ))
-            )}
-        </ul>
-          {/* <section id="prosjektListe">
+            <section id="sort">
+                <label>Sorter: </label>
+                <select name="status" id="status" onChange={handleFilterChange}>
+                    <option value="Alle">Alle prosjekter</option>
+                    <option value="Fullført">Fullførte prosjekter</option>
+                    <option value="Pågående">Pågående prosjekter</option>
+                </select>
+            </section>
+            <section id="section">
+                <h2>{name}</h2>
+                <ul id="prosjektListe">
+                    {filteredProjects.length === 0 ? (
+                        <p>Ingen prosjekter</p>
+                    ) : (
+                        filteredProjects.map((project, index) => (
+                            <li key={index} className="all">
+                                <button onClick={() => deleteProjectData(project.id)} type="button">X</button>
+                                {project.title} - Sluttdato: {project.endDate} - {project.status}
+                            </li>
+                        ))
+                    )}
+                </ul>
+                {/* <section id="prosjektListe">
             {filteredProjects.length === 0 ? (
                 <p>Ingen prosjekter</p>
             ) : (
@@ -78,13 +84,13 @@ export default function Projects({projects, children, deleteProjectData}: ProdTy
             ))
             )}
         </section> */}
-        {filteredProjects.length === 1 ? (
-            <p>Du har {filteredProjects.length} prosjekt!</p>
-        ) : (
-            <p>Du har {filteredProjects.length} prosjekter!</p>
-        )}
-      </section>
-      {children}
-      </>
+                {filteredProjects.length === 1 ? (
+                    <p>Du har {filteredProjects.length} prosjekt!</p>
+                ) : (
+                    <p>Du har {filteredProjects.length} prosjekter!</p>
+                )}
+            </section>
+            {children}
+        </>
     )
 }
